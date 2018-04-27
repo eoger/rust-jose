@@ -1,0 +1,10 @@
+[package]
+name = "jose"
+version = "0.1.0"
+authors = ["Edouard Oger <eoger@fastmail.com>", "Vlad Filippov <vfilippov@mozilla.com>"]
+
+[dependencies]
+cjose-sys = { git = "https://github.com/eoger/cjose-sys" }
+error-chain = "0.11.0"
+libc = "0.2"
+serde_json = "1.0"
