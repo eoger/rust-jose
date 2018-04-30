@@ -47,7 +47,23 @@ fn bail_on_err<T>(ptr: *mut T, err_ptr: *mut cjose_err) -> Result<*mut T> {
             c_string_to_string(err.message),
             c_string_to_string(err.function),
             c_string_to_string(err.file),
-            err.line
+            err.line.into()
+        );
+        bail!(err)
+    }
+    Ok(ptr)
+}
+
+// No parametrized mutability in Rust :(
+fn bail_on_err_const<T>(ptr: *const T, err_ptr: *mut cjose_err) -> Result<*const T> {
+    if ptr.is_null() {
+        let err = unsafe { Box::from_raw(err_ptr) };
+        let err = ErrorKind::CJoseError(
+            err.code,
+            c_string_to_string(err.message),
+            c_string_to_string(err.function),
+            c_string_to_string(err.file),
+            err.line.into()
         );
         bail!(err)
     }
