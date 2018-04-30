@@ -4,7 +4,7 @@ extern crate error_chain;
 extern crate libc;
 extern crate serde_json;
 
-mod error;
+pub mod error;
 mod util;
 
 use cjose_sys::*;
